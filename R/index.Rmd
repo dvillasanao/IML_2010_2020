@@ -1,0 +1,134 @@
+--- 
+title: "Índice de marginación a nivel localidad 2010 - 2020"
+author: "Diana Villasana Ocampo"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+url: 'https://github.com/dvillasanao/IML_2010_2020'
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::bs4_book,
+  set in the _output.yml file.
+biblio-style: apalike
+csl: chicago-fullnote-bibliography.csl
+---
+
+# Índice de marginación a nivel localidad  {.unlisted .unnumbered}
+
+El índice de marginación a nivel localidad es una herramienta clave para analizar y monitorear las condiciones socioeconómicas de las distintas localidades en un país, permitiendo identificar y comprender las disparidades y desigualdades existentes en términos de desarrollo humano y bienestar de la población.     
+
+Desde su implementación en 1990, el índice de marginación a nivel localidad ha experimentado importantes cambios y avances en su metodología y aplicación. Este índice se basa en un conjunto de variables socioeconómicas que incluyen educación, salud, vivienda, servicios básicos, ingresos y ocupación, entre otros. Estas variables se ponderan y se agrupan en diferentes dimensiones para obtener una medida comprensiva de la marginación en cada localidad.    
+
+A lo largo de las últimas décadas, los cambios en el índice de marginación a nivel localidad han reflejado transformaciones en las condiciones socioeconómicas de diversas regiones en el país. Estos cambios pueden ser resultado de factores como políticas públicas, inversión en infraestructura, desarrollo económico, entre otros. El análisis temporal del índice de marginación a nivel localidad ha permitido identificar tanto mejoras como desafíos persistentes en diferentes áreas geográficas, entre los usos más destacados se encuentra la planificación y diseño de políticas públicas dirigidas a reducir las brechas de desigualdad y mejorar las condiciones de vida de la población en las localidades más marginadas. Este índice proporciona información precisa y actualizada para identificar las áreas prioritarias de intervención y asignar recursos de manera equitativa.     
+
+**Base de datos** de los tres años se encuentran disponibles en la página oficial de [CONAPO](https://www.gob.mx/conapo/documentos/indices-de-marginacion-2020-284372)   
+
+**Datos abiertos de México** [datos.gob.mx](https://datos.gob.mx/busca/dataset/indice-de-marginacion-carencias-poblacionales-por-localidad-municipio-y-entidad)   
+
+**Publicación** [Índice De Marginación Por Entidad Federativa Y Municipio 2020](https://www.gob.mx/cms/uploads/attachment/file/835461/Indices_Coleccion_280623_localidad.pdf).    
+
+```{r, include=FALSE}
+# automatically create a bib database for R packages
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, 
+                       eval = TRUE)
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+setwd(rprojroot::find_rstudio_root_file())
+setwd(here::here())
+```  
+
+```{r, echo = FALSE, results=FALSE}
+#install.packages(pkgs = c("showtext", "extrafont"), repos = "https://cran.rstudio.com")
+## Font style 
+require(showtext)
+library(extrafont)
+# activar showtext
+showtext_auto()
+font_add_google("Montserrat", "montserrat")
+font_add_google("Raleway", "Raleway")
+```
+
+
+```{r, echo = FALSE, results=FALSE}
+# Librerías que se usaron en el documento
+require(ggplot2)
+require(ggridges)
+require(grDevices)
+require(ggpubr)
+require(dplyr)
+require(p2distance)
+require(stratification)
+require(knitr)
+require(magrittr)
+require(kableExtra)
+require(openxlsx)
+require(tidyverse)
+require(readxl)
+require(psych)
+require(stringr)
+require(corrplot)
+require(forcats)
+require(gt)
+require(sf)
+require(rgdal)        
+require(geojsonio)
+require(jsonlite)
+```
+
+```{r include=FALSE, eval=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'dp2distance', 'statification', 'corrplot'
+), 'packages.bib')
+```
+
+
+```{r, echo = FALSE}
+tablas <- c("2010", "2020")
+
+for(i in tablas){
+load(file = paste0(here::here(), "/Output/IML_", i, ".RData"))
+}
+
+p <- NULL
+for(i in 1:2){
+nombres <- names(get(paste0("DP2_",tablas[i])))
+p[[paste(tablas[i])]] <- get(paste0("DP2_", tablas[i])) %>%
+                           group_by(get(nombres[19])) %>%
+                             summarise(POB_TOT = sum(get(nombres[8])),
+                                       GM = n())
+}
+p <- do.call(cbind.data.frame, p)
+
+tabla <- p %>%
+          select(-c("2020.get(nombres[19])")) %>%
+           janitor::adorn_totals(fill = "-", where= "row")
+
+tabla %>% 
+ gt() %>%
+  tab_header(title = "Nacional: Población y unidades geograficas según el índice de marginación, 2010-2020") %>%
+   tab_options(heading.title.font.size = 12, 
+               heading.subtitle.font.size = 10,
+               table.font.names = 'montserrat',
+               table.align = "center",
+               table.font.size = 8,
+               data_row.padding = px(1)) %>%
+     tab_style(style = list(cell_text(align = "left",
+                                      weight = 'bold')),
+               locations = list(cells_title(groups = c("title")))) %>%
+     tab_style(style = list(cell_text(align = "left")),
+               locations = list(cells_title(groups = c("subtitle")))) %>%
+     tab_style(style = list(cell_text(weight = 'bold')),
+               locations = cells_body(columns = everything(), rows = tidyselect::last_col())) %>%
+      cols_label(`2010.POB_TOT` = md("**Población 2010**"),
+                 `2020.POB_TOT` = md("**Población 2020**"),
+                 `2010.GM` = md("**Localidades**"),
+                 `2020.GM` = md("**Localidades**"),
+                 "2010.get(nombres[19])" = md("**Grados**")) %>%
+       fmt_integer(columns = c(2:5), sep_mark = " ") %>%
+        tab_spanner(label = "2010",
+                    columns = c(2:3)) %>%
+        tab_spanner(label = "2020",
+                    columns = c(4:5)) %>%
+         as_raw_html() 
+```

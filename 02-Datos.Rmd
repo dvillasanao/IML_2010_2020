@@ -76,8 +76,9 @@ tabla_2020 %>%
                       OVPT= md("**OVPT**"),
                       OVHAC = md("**OVHAC**"),
                       OVSREF = md("**OVSREF**")) %>%
-         cols_width(starts_with("POB") ~ px(80), 
-                    starts_with("NOM") ~ px(150), 
+         cols_width(starts_with("POB") ~ px(100),
+                    starts_with("NOM_LOC") ~ px(200),
+                    starts_with("NOM") ~ px(120), 
                     everything() ~ px(60)) %>%
             as_raw_html() 
 ```

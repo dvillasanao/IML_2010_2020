@@ -277,7 +277,7 @@ p[[i]] <- stderr[[i]] %>%
 ```{r, echo = FALSE, fig.width=12, fig.height=12, out.width='100%'}
 knitr::include_graphics(paste0(here::here(), "/img/iteraciones.png"))
 ```
-
+</a>
 
 Se toman en cuenta el número de clases que salen del los resultados del método iterativo. Utilizando la función `strata.cumrootf()` de la paquetería `stratification` con parámetros específicos y el número de clases (`nclass`) obtenido de `min.strata`.       
 - `CV = 0.05`: Establece el coeficiente de variación.   

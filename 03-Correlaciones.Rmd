@@ -35,3 +35,4 @@ p <- lapply(1:2, function(i){
 require(knitr)
 knitr::include_graphics(paste0(here::here(), "/img/correlaciones_2010_2020.png"))
 ```
+</a>

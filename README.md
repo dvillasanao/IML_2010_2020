@@ -40,7 +40,7 @@ Para compilar este libro necesitas tener instalados los siguientes programas y p
 
 ### Bookdown  
 
-**Enlace**: <https://dvillasanao.github.io/IML_2010-2020/>   
+**Enlace**: <https://dvillasanao.github.io/IML_2010_2020/>   
 
 ### Documentos Bookdown  
 

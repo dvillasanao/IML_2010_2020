@@ -1,0 +1,160 @@
+--- 
+title: "Índice de marginación a nivel localidad 2010 - 2020"
+author: "Diana Villasana Ocampo"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+url: 'https://github.com/dvillasanao/IML_2010_2020'
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::bs4_book,
+  set in the _output.yml file.
+  
+biblio-style: apalike
+csl: chicago-fullnote-bibliography.csl
+---
+
+# Índice de marginación a nivel localidad  {.unlisted .unnumbered}
+
+El índice de marginación elaborado por el Consejo Nacional de Población (`CONAPO`) se ha convertido en una herramienta esencial para analizar y medir las condiciones socioeconómicas en México, particularmente a nivel loacalidad. Este índice, desde su primera publicación en 1990, ha sido fundamental para identificar y cuantificar las desigualdades y disparidades que existen entre diferentes regiones del país.   
+
+**Historia y Evolución**:     
+
+- Décadas de `1970` y `1980`: Comienzo de los primeros ejercicios de medición de desigualdad.   
+- `1990`: Primera publicación del índice de marginación utilizando el Análisis de Componentes Principales (ACP). Aunque útil, este método no permitía comparaciones temporales.   
+- Demanda de Comparabilidad: La necesidad de evaluar la evolución de la marginación a lo largo del tiempo llevó a una revisión metodológica.     
+
+**Cambio Metodológico**:   
+
+- Nueva Técnica: En 2020, se adoptó la técnica de Distancias Ponderadas al Cuadrado para mejorar la comparabilidad temporal y la precisión de los datos.   
+- Ajustes en Indicadores: Se realizaron modificaciones para alinear el índice con las recomendaciones de organismos nacionales e internacionales.  
+- Método de Estratificación: Se continuó utilizando la técnica de estratificación de Dalenius y Hodges para el cálculo de los estratos del índice.    
+
+**Impacto y Futuro**:   
+
+El índice de marginación tiene como objetivo proporcionar información objetiva y cuantitativa sobre las disparidades socioeconómicas entre los municipios. Esta información es crucial para la toma de decisiones en políticas públicas, permitiendo una asignación más efectiva de recursos y esfuerzos para reducir la marginación y promover un desarrollo equitativo.    
+
+Las variables consideradas en el índice incluyen el nivel educativo, acceso a servicios de salud, infraestructura básica, vivienda, ingresos y ocupación. Estas variables se agrupan en dimensiones que reflejan el grado de marginación de cada municipio. Un índice de marginación más bajo indica mejores condiciones de desarrollo humano y bienestar.    
+
+A lo largo de las décadas, el índice ha evolucionado significativamente en términos de metodología y actualización de datos, gracias a los avances tecnológicos y el acceso a información geoespacial. Desde su creación hasta el presente, el índice ha permitido identificar tendencias y cambios en las condiciones socioeconómicas de las regiones del país, destacando tanto áreas de mejora como zonas que aún enfrentan desafíos considerables en términos de marginación y pobreza.    
+
+Este índice sigue siendo una herramienta crucial para identificar las mejores prácticas y generar estrategias de intervención focalizadas en las áreas que más lo necesitan, con el fin de mejorar las condiciones de vida de la población mexicana.  
+
+**Base de datos** de los tres años se encuentran disponibles en la página oficial de [CONAPO](https://www.gob.mx/conapo/documentos/indices-de-marginacion-2020-284372)   
+
+**Datos abiertos de México** [datos.gob.mx](https://datos.gob.mx/busca/dataset/indice-de-marginacion-carencias-poblacionales-por-localidad-municipio-y-entidad)   
+
+**Publicación** [Índice De Marginación Por Entidad Federativa Y Municipio 2020](https://www.gob.mx/conapo/documentos/indices-de-marginacion-2020-284372).    
+
+**Índice de marginación a nivel estatal** [Bookdown](https://dvillasanao.github.io/IME_2010_2020/)   
+**Índice de marginación a nivel municipal** [Bookdown](https://dvillasanao.github.io/IMM_2010-2020/)   
+**Índice de marginación a nivel localidad** [Bookdown](https://dvillasanao.github.io/IML_2010_2020/)   
+**Índice de marginación a nivel AGEB** [Bookdown](https://dvillasanao.github.io/IML_2010-2020/)   
+**Índice de marginación a nivel Colonia** [Bookdown](https://dvillasanao.github.io/IMC_2020/)        
+
+```{r, include=FALSE}
+# automatically create a bib database for R packages
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, 
+                       eval = TRUE)
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+setwd(rprojroot::find_rstudio_root_file())
+```  
+
+```{r, echo=FALSE, results=FALSE}
+#Font Stlye
+require(showtext)
+library(extrafont)
+# activar showtext
+windowsFonts()
+#Century Gothic
+```
+
+```{r, echo = FALSE, results=FALSE}
+# Librerías que se usaron en el documento
+require(Cairo)
+require(ggplot2)
+require(ggridges)
+require(grDevices)
+require(ggpubr)
+require(dplyr)
+require(p2distance)
+require(stratification)
+require(knitr)
+require(magrittr)
+require(kableExtra)
+require(openxlsx)
+require(tidyverse)
+require(readxl)
+require(psych)
+require(stringr)
+require(corrplot)
+require(forcats)
+require(gt)
+require(rgdal)      
+require(geojsonio)
+require(jsonlite)
+require(leaflet)
+require(htmlwidgets)
+require(leaflet.extras)
+require(mapview)
+require(leaflet.providers)
+```
+
+```{r include=FALSE, eval=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'dp2distance', 'statification', 'corrplot'
+), 'packages.bib')
+```
+
+
+```{r, echo = FALSE}
+tablas <- c("2010", "2020")
+
+for(i in tablas){
+load(file = paste0(here::here(), "/Output/IML_", i, ".RData"))
+}
+
+p <- NULL
+for(i in 1:2){
+nombres <- names(get(paste0("DP2_",tablas[i])))
+p[[paste(tablas[i])]] <- get(paste0("DP2_", tablas[i])) %>%
+                           group_by(get(nombres[19])) %>%
+                             summarise(POB_TOT = sum(get(nombres[8])),
+                                       GM = n())
+}
+p <- do.call(cbind.data.frame, p)
+
+tabla <- p %>%
+          select(-c("2020.get(nombres[19])")) %>%
+           janitor::adorn_totals(fill = "-", where= "row")
+
+tabla %>% 
+ gt() %>%
+  tab_header(title = "Nacional: Población y unidades geograficas según el índice de marginación, 2010-2020") %>%
+   tab_options(heading.title.font.size = 14, 
+               heading.subtitle.font.size = 12,
+               table.font.names = 'Century Gothic',
+               table.align = "center",
+               table.font.size = 10,
+               data_row.padding = px(1)) %>%
+     tab_style(style = list(cell_text(align = "left",
+                                      weight = 'bold')),
+               locations = list(cells_title(groups = c("title")))) %>%
+     tab_style(style = list(cell_text(align = "left")),
+               locations = list(cells_title(groups = c("subtitle")))) %>%
+     tab_style(style = list(cell_text(weight = 'bold')),
+               locations = cells_body(columns = everything(), rows = tidyselect::last_col())) %>%
+      cols_label(`2010.POB_TOT` = md("**Población 2010**"),
+                 `2020.POB_TOT` = md("**Población 2020**"),
+                 `2010.GM` = md("**Localidades**"),
+                 `2020.GM` = md("**Localidades**"),
+                 "2010.get(nombres[19])" = md("**Grados**")) %>%
+       fmt_integer(columns = c(2:5), sep_mark = " ") %>%
+        tab_spanner(label = "2010",
+                    columns = c(2:3)) %>%
+        tab_spanner(label = "2020",
+                    columns = c(4:5)) %>%
+         as_raw_html() 
+```

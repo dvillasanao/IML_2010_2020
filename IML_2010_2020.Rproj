@@ -13,4 +13,3 @@ RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
 BuildType: Website
-WebsitePath: D:/Github_Personal/IM_2020/Bookdown/IML_2010_2020

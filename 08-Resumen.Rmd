@@ -1,4 +1,4 @@
-# Resumen  {.unlisted .unnumbered}
+# Resumen {.unlisted .unnumbered}
 
 ```{r, echo = FALSE}
 for(i in tablas){
@@ -48,40 +48,52 @@ tabla %>%
          as_raw_html() 
 ```
 
-La tabla presenta una comparación temporal del grado de marginación a nivel de localidades en México, desagregada por el grado de marginación para los años 2010 y 2020. 
+La tabla presenta una comparación temporal del grado de marginación a nivel de localidades en México, desagregada por el grado de marginación para los años 2010 y 2020.
 
-**Observaciones Clave**     
+**Observaciones Clave**
 
-**2.- Disminución en Grados Medio y Alto:**\    
+**2.- Disminución en Grados Medio y Alto:** 
 
-La población en grados de marginación Medio y Alto muestra una tendencia a la baja. En 2010, el 6.7% de la población residía en localidades con grado de marginación Medio, disminuyendo al 6.2% en 2020. Para el grado Alto, la población disminuyó del 3.0% en 2010 al 2.8% en 2020.    
+La población en grados de marginación Medio y Alto muestra una tendencia a la baja. En 2010, el 6.7% de la población residía en localidades con grado de marginación Medio, disminuyendo al 6.2% en 2020. Para el grado Alto, la población disminuyó del 3.0% en 2010 al 2.8% en 2020.
 
-**3.- Estabilidad en Grado Muy Bajo:**\    
+**3.- Estabilidad en Grado Muy Bajo:** 
 
-La población en el grado de marginación Muy Bajo se mantuvo relativamente estable, con un ligero incremento. En 2010, el 75.5% de la población residía en localidades con este grado de marginación, aumentando ligeramente al 75.7% en 2020.     
+La población en el grado de marginación Muy Bajo se mantuvo relativamente estable, con un ligero incremento. En 2010, el 75.5% de la población residía en localidades con este grado de marginación, aumentando ligeramente al 75.7% en 2020.
 
-**4.- Comparación entre Grados Muy Alto y Alto vs. Muy Bajo y Bajo:**\   
+**4.- Comparación entre Grados Muy Alto y Alto vs. Muy Bajo y Bajo:** 
 
-En términos generales, la mayoría de la población reside en localidades con grados de marginación Muy Bajo y Bajo. En 2010, el 89.4% de la población se encontraba en estos grados, aumentando ligeramente al 90.1% en 2020. Por otro lado, la población en grados de marginación Muy Alto y Alto representa una proporción mucho menor, con el 3.8% en 2010 y una ligera disminución al 3.7% en 2020.    
+En términos generales, la mayoría de la población reside en localidades con grados de marginación Muy Bajo y Bajo. En 2010, el 89.4% de la población se encontraba en estos grados, aumentando ligeramente al 90.1% en 2020. Por otro lado, la población en grados de marginación Muy Alto y Alto representa una proporción mucho menor, con el 3.8% en 2010 y una ligera disminución al 3.7% en 2020.
 
-En resumen, la mayoría de la población reside en localidades con grados de marginación Muy Bajo y Bajo, representando más del 89% de la población en los años considerados. La población en grados de marginación Muy Alto y Alto, aunque ha tenido un pequeño incremento, sigue representando una porción mucho menor de la población total.     
+En resumen, la mayoría de la población reside en localidades con grados de marginación Muy Bajo y Bajo, representando más del 89% de la población en los años considerados. La población en grados de marginación Muy Alto y Alto, aunque ha tenido un pequeño incremento, sigue representando una porción mucho menor de la población total.
 
-En el escenario general, entre 2010 y 2020, se observa que la mayor parte de la población en México vive en localidades con grados de marginación Muy Bajo y Bajo, abarcando más del 89% de la población en ambos años. Esto indica una concentración significativa de la población en áreas con menores niveles de marginación. Sin embargo, hay un ligero aumento en la población que reside en localidades con un grado de marginación Muy Alto, lo cual podría ser motivo de mesura por los incrementos de población en estas localidades. En contraste, las localidades con grados de marginación Medio y Alto han visto una disminución en su proporción de la población total, lo que sugiere una leve mejora en esos niveles de marginación. En general, la tendencia muestra una estabilidad en los grados de marginación Muy Bajo y una pequeña reducción en los grados Alto y Medio, mientras que los grados Muy Alto y Bajo han visto incrementos en sus proporciones de población.    
+En el escenario general, entre 2010 y 2020, se observa que la mayor parte de la población en México vive en localidades con grados de marginación Muy Bajo y Bajo, abarcando más del 89% de la población en ambos años. Esto indica una concentración significativa de la población en áreas con menores niveles de marginación. Sin embargo, hay un ligero aumento en la población que reside en localidades con un grado de marginación Muy Alto, lo cual podría ser motivo de mesura por los incrementos de población en estas localidades. En contraste, las localidades con grados de marginación Medio y Alto han visto una disminución en su proporción de la población total, lo que sugiere una leve mejora en esos niveles de marginación. En general, la tendencia muestra una estabilidad en los grados de marginación Muy Bajo y una pequeña reducción en los grados Alto y Medio, mientras que los grados Muy Alto y Bajo han visto incrementos en sus proporciones de población.
 
+## Mapa a nivel localidad, 2020 {.unnumbered}
 
-## Mapa a nivel localidad {-}
+<!--html_preserve-->
+<iframe src = "https://indicemarginacionxlocalidad2020.netlify.app/" position= "absolute"; top="0"; left="0"; bottom="0"; right="0"; width="730px"; height="700px"; border="none"; margin="0"; padding="0";  frameborder="0"; overflow="hidden"; display= "block";  min-height= "100vh";>"</iframe>
+<!--/html_preserve-->
 
-
-```{r, echo=FALSE, out.width='100%', warning=FALSE, message=FALSE}
+```{r, echo=FALSE, out.width='100%', warning=FALSE, message=FALSE, eval = FALSE}
 p <- readRDS(paste0(here::here(), "/Output/Mapa.rds"))
 p
 ```
 
+## Comparación en el tiempo {.unnumbered}
 
-## Comparación en el tiempo {-}
 
-<div style="height:500px;">
+<!--html_preserve-->
+<iframe src = "https://imlocalidadesleaflet2020.netlify.app/" position= "absolute"; top="0"; left="0"; bottom="0"; right="0"; width="730px"; height="350px"; border="none"; margin="0"; padding="0";  frameborder="0"; overflow="hidden"; display= "block";  min-height= "100vh";>"</iframe>
+<!--/html_preserve-->
+
+<!--html_preserve-->
+<iframe src = "https://imlocalidadesleaflet2010.netlify.app/" position= "absolute"; top="0"; left="0"; bottom="0"; right="0"; width="730px"; height="350px"; border="none"; margin="0"; padding="0";  frameborder="0"; overflow="hidden"; display= "block";  min-height= "100vh";>"</iframe>
+<!--/html_preserve-->
+
+## Comparación en el tiempo {.unnumbered}
+
+::: {style="height:500px;"}
 ```{r, echo=FALSE, out.width='100%', eval = FALSE}
 readRDS(paste0(here::here(), "/Output/Mapas_2010-2020.rds"))
 ```
-</div>
+:::

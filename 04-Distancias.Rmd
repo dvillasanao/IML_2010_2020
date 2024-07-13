@@ -13,7 +13,7 @@ Sean:
 
 $\:\:\circ\:r$, el número de municipios;  
 $\:\:\circ\:n$, el número de variables;  
-$\:\:\circ\:x_{ij}$, el valor de la variable j en el municipio $i$;  
+$\:\:\circ\:x_{ij}$, el valor de la variable j en la localidad $i$;  
 $\:\:\circ\:\sigma_{j}$, La Desviación Típica de la variable $j$;   
 $\:\:\circ\:R^{2}_{i,i-1,...,1}$ el Coeficiente de Determinación en la Regresión de $X_{i}$ sobre $X_{i-1},X_{i-2},...,X_{1}$. 
 

@@ -15,7 +15,7 @@ tablas <- c("2010", "2020")
 
  Dentro del iterador `for()`, para cada año se construye el nombre del archivo de datos:    
 
-- Obtención de la tabla: `get(paste0("tabla_",i))` obtiene la tabla cargada previamente (donde el nombre de cada tabla cargada es `tabla_2010`, `tabla_2020`, etc.).    
+- Obtención de la tabla: `get(paste0("tabla_", i))` obtiene la tabla cargada previamente (donde el nombre de cada tabla cargada es `tabla_2010`, `tabla_2020`, etc.).    
 - Renombrando de la columna: `rename("ANIO" = "AÑO")` cambia el nombre de la columna AÑO a `ANIO`.   
 - Filtrado de datos: `filter(NOM_ENT != "Nacional")` elimina las filas donde la columna `NOM_ENT` tiene el valor "Nacional".    
 - Conversión de la columna a factor: `dplyr::mutate(ANIO = as.factor(.$ANIO))` convierte la columna `ANIO` en un factor.  

@@ -89,11 +89,3 @@ p
 <!--html_preserve-->
 <iframe src = "https://imlocalidadesleaflet2010.netlify.app/" position= "absolute"; top="0"; left="0"; bottom="0"; right="0"; width="730px"; height="350px"; border="none"; margin="0"; padding="0";  frameborder="0"; overflow="hidden"; display= "block";  min-height= "100vh";>"</iframe>
 <!--/html_preserve-->
-
-## Comparación en el tiempo {.unnumbered}
-
-::: {style="height:500px;"}
-```{r, echo=FALSE, out.width='100%', eval = FALSE}
-readRDS(paste0(here::here(), "/Output/Mapas_2010-2020.rds"))
-```
-:::
